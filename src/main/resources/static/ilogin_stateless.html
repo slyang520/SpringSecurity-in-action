@@ -1,0 +1,171 @@
+<html>
+
+<head>
+    <title>Login Page</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+</head>
+
+<body>
+
+<h3>spring security stateless</h3>
+
+<table>
+    <tr>
+        <td>User:</td>
+        <td><input id="name" type='text' name='name' value=''></td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td><input id="password" type='password' name='password'/></td>
+    </tr>
+    <tr>
+        <td colspan='2'>
+            <input name="submit" type='submit' id="login" value="Login"/>
+        </td>
+    </tr>
+</table>
+
+<button id="test1">
+    /test1#testAnonymous
+</button>
+
+<button id="test2">
+    /test2#testRoleUser
+</button>
+
+<button id="test3">
+    /test3#testRoleAdmin
+</button>
+
+<button id="test4">
+    /test4#testRoleAdmin2
+</button>
+
+<button id="test5">
+    /test5#testUserAuthoritySelect
+</button>
+
+<button id="test6">
+    /test6#testUserAuthorityADD
+</button>
+
+
+<script>
+
+    $.ajaxSetup({
+        beforeSend: function (request) {
+            var token = window.localStorage.getItem('token');
+            request.setRequestHeader("API_TOKEN", token);
+        }
+    });
+
+    $(document).ready(function () {
+
+        $('#login').click(function () {
+            var datas = {
+                name: $("#name").val(),
+                //password: md5($("#password").val())
+                password: $("#password").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: '/ilogin_ajax',
+                data: datas,
+                success: function (msg) {
+                    localStorage.setItem('token', msg.token);
+                    localStorage.setItem('user', JSON.stringify(msg.user));
+                    alert('Login success');
+                },
+                error: function (e) {
+                    alert('error' + JSON.stringify(e));
+                }
+            });
+        });
+
+        $('#test1').click(function () {
+            $.ajax({
+                type: "GET",
+                url: '/test1',
+                success: function (msg) {
+                    alert(msg);
+                },
+                error: function (e) {
+                    alert('error' + JSON.stringify(e));
+                }
+            });
+        });
+
+        $('#test2').click(function () {
+            $.ajax({
+                type: "GET",
+                url: '/test2',
+                success: function (msg) {
+                    alert(msg);
+                },
+                error: function (e) {
+                    alert('error' + JSON.stringify(e));
+                }
+            });
+        });
+
+        $('#test3').click(function () {
+            $.ajax({
+                type: "GET",
+                url: '/test3',
+                success: function (msg) {
+                    alert(msg);
+                },
+                error: function (e) {
+                    alert('error' + JSON.stringify(e));
+                }
+            });
+        });
+
+        $('#test4').click(function () {
+            $.ajax({
+                type: "GET",
+                url: '/test4',
+                success: function (msg) {
+                    alert(msg);
+                },
+                error: function (e) {
+                    alert('error' + JSON.stringify(e));
+                }
+            });
+        });
+
+        $('#test5').click(function () {
+            $.ajax({
+                type: "GET",
+                url: '/test5',
+                success: function (msg) {
+                    alert(msg);
+                },
+                error: function (e) {
+                    alert('error' + JSON.stringify(e));
+                }
+            });
+        });
+
+        $('#test6').click(function () {
+            $.ajax({
+                type: "GET",
+                url: '/test6',
+                success: function (msg) {
+                    alert(msg);
+                },
+                error: function (e) {
+                    alert('error' + JSON.stringify(e));
+                }
+            });
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>

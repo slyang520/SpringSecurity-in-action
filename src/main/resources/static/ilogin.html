@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <title>Login Page</title>
+    <meta charset="UTF-8">
+
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+
+    <style>
+        a {
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+<h3>Login with Username and Password</h3>
+
+<table>
+    <tr>
+        <td>User:</td>
+        <td><input id="name" type='text' name='name' value=''></td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td><input id="password" type='password' name='password'/></td>
+    </tr>
+    <tr>
+        <td colspan='2'>
+            <input name="submit" type='submit' id="login" value="Login"/>
+        </td>
+    </tr>
+</table>
+
+
+<a id="test1" href="/test1">
+    /test1#testAnonymous
+</a>
+
+
+<a id="test2" href="/test2">
+    /test2#testRoleUser
+</a>
+
+<a id="test3" href="/test3">
+    /test3#testRoleAdmin
+</a>
+
+<a id="test4" href="/test4">
+    /test4#testRoleAdmin2
+</a>
+
+<a id="test5" href="/test5">
+    /test5#testUserAuthoritySelect
+</a>
+
+<a id="test6" href="/test5">
+    /test6#testUserAuthorityADD
+</a>
+
+<script>
+
+
+    $(document).ready(function () {
+
+        $('#login').click(function () {
+
+            var datas = {
+                name: $("#name").val(),
+//                password: md5($("#password").val())
+                password: $("#password").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: '/ilogin_ajax',
+                data: datas,
+                success: function (msg) {
+                    alert(msg);
+                }
+            });
+
+        });
+
+    });
+
+
+</script>
+
+</body>
+
+</html>
