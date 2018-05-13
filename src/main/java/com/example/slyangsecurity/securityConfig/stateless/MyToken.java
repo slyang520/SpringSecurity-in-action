@@ -1,6 +1,5 @@
 package com.example.slyangsecurity.securityConfig.stateless;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +8,6 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-@ConditionalOnProperty(value = "global.security.state", havingValue = "false")
 @Component
 public class MyToken implements ITokenManager {
 

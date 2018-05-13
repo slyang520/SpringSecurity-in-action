@@ -17,7 +17,6 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-@ConditionalOnProperty(value = "global.security.state", havingValue = "false")
 @Component
 public class LoginSuccessHandlerStateLess implements AuthenticationSuccessHandler {
 

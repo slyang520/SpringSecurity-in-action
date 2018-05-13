@@ -27,6 +27,10 @@
     </tr>
 </table>
 
+<a href="/login/oauth2/github">
+    Login gitHub
+</a>
+
 <button id="test1">
     /test1#testAnonymous
 </button>
@@ -51,6 +55,22 @@
     /test6#testUserAuthorityADD
 </button>
 
+<table>
+    <tr>
+        <td>User:/mobile</td>
+        <td><input  type='text' name='mobile' value=''></td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td><input  type='password' name='password'/></td>
+    </tr>
+    <tr>
+        <td colspan='2'>
+            <input name="submit" type='submit' id="loginMobile" value="Login"/>
+        </td>
+    </tr>
+</table>
+
 
 <script>
 
@@ -72,6 +92,25 @@
             $.ajax({
                 type: "POST",
                 url: '/ilogin_ajax',
+                data: datas,
+                success: function (msg) {
+                    localStorage.setItem('token', msg.token);
+                    localStorage.setItem('user', JSON.stringify(msg.user));
+                    alert('Login success');
+                },
+                error: function (e) {
+                    alert('error' + JSON.stringify(e));
+                }
+            });
+        });
+
+        $('#loginMobile').click(function () {
+            var datas = {
+                mobile: $("#mobile").val(),
+            };
+            $.ajax({
+                type: "POST",
+                url: '/login/mobile',
                 data: datas,
                 success: function (msg) {
                     localStorage.setItem('token', msg.token);
@@ -163,6 +202,16 @@
         });
 
     });
+
+    var getQueryString = function(item) {
+        var svalue = location.search.match(new RegExp("[\?\&]" + item + "=([^\&]*)(\&?)", "i"));
+        return svalue ? svalue[1] : svalue;
+    }
+
+    var ticket = getQueryString('ticket');
+    if (ticket) {
+        localStorage.setItem('token', ticket);
+    }
 
 </script>
 

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -31,6 +32,7 @@ public class UserDetailsServiceMockJDBC implements UserDetailsService {
 		userMap.put("user", "user");
 		userMap.put("root", "root");
 		userMap.put("admin", "admin");
+		userMap.put("github_user_id", "");
 
 		userRoleAuthority.put("user", new HashSet<>(Arrays.asList(
 				new SimpleGrantedAuthority("ROLE_USER"),
