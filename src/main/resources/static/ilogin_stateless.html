@@ -77,7 +77,7 @@
     $.ajaxSetup({
         beforeSend: function (request) {
             var token = window.localStorage.getItem('token');
-            request.setRequestHeader("API_TOKEN", token);
+//            request.setRequestHeader("SSO_API_TOKEN", 'test');
         }
     });
 
@@ -128,7 +128,7 @@
                 type: "GET",
                 url: '/test1',
                 success: function (msg) {
-                    alert(msg);
+                    alert(JSON.stringify(msg));
                 },
                 error: function (e) {
                     alert('error' + JSON.stringify(e));
@@ -141,7 +141,7 @@
                 type: "GET",
                 url: '/test2',
                 success: function (msg) {
-                    alert(msg);
+                    alert(JSON.stringify(msg));
                 },
                 error: function (e) {
                     alert('error' + JSON.stringify(e));
@@ -154,7 +154,7 @@
                 type: "GET",
                 url: '/test3',
                 success: function (msg) {
-                    alert(msg);
+                    alert(JSON.stringify(msg));
                 },
                 error: function (e) {
                     alert('error' + JSON.stringify(e));
@@ -167,7 +167,7 @@
                 type: "GET",
                 url: '/test4',
                 success: function (msg) {
-                    alert(msg);
+                    alert(JSON.stringify(msg));
                 },
                 error: function (e) {
                     alert('error' + JSON.stringify(e));
@@ -180,7 +180,7 @@
                 type: "GET",
                 url: '/test5',
                 success: function (msg) {
-                    alert(msg);
+                    alert(JSON.stringify(msg));
                 },
                 error: function (e) {
                     alert('error' + JSON.stringify(e));
@@ -193,7 +193,7 @@
                 type: "GET",
                 url: '/test6',
                 success: function (msg) {
-                    alert(msg);
+                    alert(JSON.stringify(msg));
                 },
                 error: function (e) {
                     alert('error' + JSON.stringify(e));

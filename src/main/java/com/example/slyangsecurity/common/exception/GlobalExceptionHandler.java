@@ -1,0 +1,40 @@
+package com.example.slyangsecurity.common.exception;
+
+
+import com.example.slyangsecurity.common.utils.GlobalCode;
+import com.example.slyangsecurity.common.utils.R;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+	private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+	@ExceptionHandler(value = Exception.class)
+	@ResponseBody
+	public R apiCommonErrorHandler(Exception e) throws Exception {
+		e.printStackTrace();
+		logger.info("apiErrorHandler  {} ", e.getMessage());
+		return R.errorGlobal(GlobalCode.SERVER_ERROR);
+	}
+
+	@ExceptionHandler(value = LocalException.class)
+	@ResponseBody
+	public R apiLocalErrorHandler(LocalException e) throws Exception {
+		logger.info("apiErrorHandler  {} ", e.getMessage());
+		return R.errorLocal(e.getCode(), e.getMessage());
+	}
+
+	@ExceptionHandler(value = GlobalException.class)
+	@ResponseBody
+	public R apiGlobalErrorHandler(GlobalException e) throws Exception {
+		logger.info("apiErrorHandler  {} ", e.getMessage());
+		return R.errorGlobal(e.getGlobalCode());
+	}
+
+}
