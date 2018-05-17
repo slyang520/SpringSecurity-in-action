@@ -45,6 +45,11 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new TokenAuthUserService();
 	}
 
+//	@Bean
+//	DecodeApiFilter decodeApiFilter() {
+//		return new DecodeApiFilter();
+//	}
+
 	/**
 	 * prePostEnabled :决定Spring Security的前注解是否可用 [@PreAuthorize,@PostAuthorize,..]
 	 * secureEnabled : 决定是否Spring Security的保障注解 [@Secured] 是否可用
@@ -75,6 +80,7 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable();
 
 		http.addFilterBefore(tokenPreAuthenticationFilter(), AnonymousAuthenticationFilter.class);
+		//http.addFilterAfter(decodeApiFilter(), SecurityContextPersistenceFilter.class);
 
 	}
 
