@@ -26,14 +26,14 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(value = LocalException.class)
 	@ResponseBody
 	public R apiLocalErrorHandler(LocalException e) throws Exception {
-		logger.info("apiErrorHandler  {} ", e.getMessage());
+		logger.info("apiErrorHandler   LocalException {} ", e.getMessage());
 		return R.errorLocal(e.getCode(), e.getMessage());
 	}
 
 	@ExceptionHandler(value = GlobalException.class)
 	@ResponseBody
 	public R apiGlobalErrorHandler(GlobalException e) throws Exception {
-		logger.info("apiErrorHandler  {} ", e.getMessage());
+		logger.info("apiErrorHandler  GlobalException {} ", e.getMessage());
 		return R.errorGlobal(e.getGlobalCode());
 	}
 

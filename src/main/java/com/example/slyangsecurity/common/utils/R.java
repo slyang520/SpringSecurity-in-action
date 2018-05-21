@@ -6,7 +6,8 @@ public class R {
 
 	private int code;    // 全局code
 	private String message;
-	private Data data = new Data();
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Data data;
 
 	public static R ok() {
 		return new R(GlobalCode.SUCCESS);
@@ -14,12 +15,14 @@ public class R {
 
 	public static R ok(Object data) {
 		R r = new R(GlobalCode.SUCCESS);
+		r.setData(new Data());
 		r.getData().setData(data);
 		return r;
 	}
 
 	public static R errorLocal(int code, String message) {
 		R r = new R(GlobalCode.SUCCESS);
+		r.setData(new Data());
 		r.getData().setCode(code);
 		r.getData().setMessage(message);
 		return r;
@@ -67,7 +70,7 @@ public class R {
 				'}';
 	}
 
-	private class Data {
+	private static class Data {
 		private int code;   // 业务code
 		private Object data;
 		@JsonInclude(JsonInclude.Include.NON_NULL)

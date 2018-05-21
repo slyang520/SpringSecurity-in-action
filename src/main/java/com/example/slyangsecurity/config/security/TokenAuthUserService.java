@@ -45,6 +45,10 @@ public class TokenAuthUserService
 			logger.debug("验证身份通过：{}> " + headerToken);
 		}
 
+		// todo
+		// to set userDetails
+		//token.setDetails();
+
 		return user;
 	}
 

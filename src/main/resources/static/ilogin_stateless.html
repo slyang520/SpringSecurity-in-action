@@ -77,7 +77,7 @@
     $.ajaxSetup({
         beforeSend: function (request) {
             var token = window.localStorage.getItem('token');
-//            request.setRequestHeader("SSO_API_TOKEN", 'test');
+            request.setRequestHeader("SSO_API_TOKEN", 'test');
         }
     });
 
