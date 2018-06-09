@@ -5,6 +5,7 @@ import com.example.slyangsecurity.common.utils.GlobalCode;
 import com.example.slyangsecurity.common.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,8 +19,10 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public R apiCommonErrorHandler(Exception e) throws Exception {
-		e.printStackTrace();
 		logger.info("apiErrorHandler  {} ", e.getMessage());
+		if (e instanceof AccessDeniedException) {
+			return R.errorGlobal(GlobalCode.NOT_AUTHORITY);
+		}
 		return R.errorGlobal(GlobalCode.SERVER_ERROR);
 	}
 

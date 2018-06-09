@@ -45,6 +45,16 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new TokenAuthUserService();
 	}
 
+	@Bean
+	NotLoginHandler notLoginHandler() {
+		return new NotLoginHandler();
+	}
+
+	@Bean
+	NotAuthorityHandler notAuthorityHandler() {
+		return new NotAuthorityHandler();
+	}
+
 //	@Bean
 //	DecodeApiFilter decodeApiFilter() {
 //		return new DecodeApiFilter();
@@ -64,13 +74,16 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/js/**", "/css/**", "/**/*.ico").permitAll()
+
 				.antMatchers(
 						"/",
+						"/test/cookies",
 						"/test1",
 						"/ilogin_stateless.html",
 						"/login/github",
 						"/login/oauth2/github",
 						"/oauth/**/callback").permitAll()
+
 				.antMatchers("/admin/**", "/test4").hasRole("ADMIN")
 				.anyRequest().authenticated();
 
@@ -80,7 +93,10 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable();
 
 		http.addFilterBefore(tokenPreAuthenticationFilter(), AnonymousAuthenticationFilter.class);
-		//http.addFilterAfter(decodeApiFilter(), SecurityContextPersistenceFilter.class);
+
+		http.exceptionHandling()
+				.authenticationEntryPoint(notLoginHandler())
+				.accessDeniedHandler(notAuthorityHandler());
 
 	}
 

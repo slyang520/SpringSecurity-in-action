@@ -3,14 +3,17 @@ buildscript {
 		springBootVersion = '1.5.8.RELEASE'
 	}
 	repositories {
-		mavenCentral()
+		maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+		maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+		maven { url 'https://plugins.gradle.org/m2/' }
+		maven { url "https://jitpack.io" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 
-apply plugin: 'jar'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -21,7 +24,11 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	maven { url "http://maven.aliyun.com/nexus/content/repositories/central" }
+	maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+	maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+	maven { url 'https://plugins.gradle.org/m2/' }
+	maven { url "https://jitpack.io" }
 	mavenCentral()
 }
 
