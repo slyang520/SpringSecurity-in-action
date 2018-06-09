@@ -39,6 +39,9 @@ public class TokenAuthUserService
 				new SimpleGrantedAuthority("user:del"),
 				new SimpleGrantedAuthority("user:update")));
 
+
+		//CASE:   TOKEN 过期
+		//User user = new User(headerToken, headerToken, true, true, true, false, authorities);
 		User user = new User(headerToken, headerToken, true, true, true, true, authorities);
 
 		if (logger.isDebugEnabled()) {

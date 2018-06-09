@@ -5,6 +5,8 @@ import com.example.slyangsecurity.common.utils.R;
 import com.example.slyangsecurity.common.utils.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -27,6 +29,14 @@ public class NotLoginHandler implements AuthenticationEntryPoint {
 						 HttpServletResponse response,
 						 AuthenticationException authException) throws IOException, ServletException {
 		logger.debug(" NotLoginHandler [commence]  {}  {}", authException.getMessage(), authException.getClass().getSimpleName());
-		WebUtil.writeJSON(R.errorGlobal(GlobalCode.USER_NOT_LOGIN), response);
+
+		if (authException instanceof InsufficientAuthenticationException
+				|| authException instanceof CredentialsExpiredException
+				) {
+			WebUtil.writeJSON(R.errorGlobal(GlobalCode.TOKEN_INVALID), response);
+		} else {
+			WebUtil.writeJSON(R.errorGlobal(GlobalCode.USER_NOT_LOGIN), response);
+		}
+
 	}
 }
