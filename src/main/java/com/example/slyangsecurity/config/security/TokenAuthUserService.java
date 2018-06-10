@@ -41,7 +41,7 @@ public class TokenAuthUserService
 
 
 		//CASE:   TOKEN 过期
-		//User user = new User(headerToken, headerToken, true, true, true, false, authorities);
+		//User user = new User(headerToken, headerToken, true, true, false, true, authorities);
 		User user = new User(headerToken, headerToken, true, true, true, true, authorities);
 
 		if (logger.isDebugEnabled()) {

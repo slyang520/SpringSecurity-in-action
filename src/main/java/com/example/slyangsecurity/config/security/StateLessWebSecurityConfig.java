@@ -37,7 +37,9 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	TokenPreAuthenticationFilter tokenPreAuthenticationFilter() throws Exception {
-		return new TokenPreAuthenticationFilter(this.authenticationManager());
+		TokenPreAuthenticationFilter tokenPreAuthenticationFilter = new TokenPreAuthenticationFilter(this.authenticationManager());
+		tokenPreAuthenticationFilter.setAuthenticationFailureHandler(authFailHandler());
+		return tokenPreAuthenticationFilter;
 	}
 
 	@Bean
@@ -53,6 +55,11 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	NotAuthorityHandler notAuthorityHandler() {
 		return new NotAuthorityHandler();
+	}
+
+	@Bean
+	AuthFailHandler authFailHandler() {
+		return new AuthFailHandler();
 	}
 
 //	@Bean
@@ -73,17 +80,12 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/js/**", "/css/**", "/**/*.ico").permitAll()
-
+				.antMatchers("/**/*.js", "/**/*.css", "/**/*.ico", "/**/*.jpg", "/**/*.png").permitAll()
 				.antMatchers(
 						"/",
-						"/test/cookies",
 						"/test1",
-						"/ilogin_stateless.html",
-						"/login/github",
-						"/login/oauth2/github",
-						"/oauth/**/callback").permitAll()
-
+						"/stateless.html",
+						"/login**").permitAll()
 				.antMatchers("/admin/**", "/test4").hasRole("ADMIN")
 				.anyRequest().authenticated();
 

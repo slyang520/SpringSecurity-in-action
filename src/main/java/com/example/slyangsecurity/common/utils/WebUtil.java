@@ -13,8 +13,8 @@ public class WebUtil {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(objectMapper.writeValueAsString(object));
-		response.flushBuffer();
+		out.flush();
+		out.close();
 	}
-
 
 }
