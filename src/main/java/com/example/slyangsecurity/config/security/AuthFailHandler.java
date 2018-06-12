@@ -14,11 +14,15 @@ public class AuthFailHandler implements AuthenticationFailureHandler {
 
 	private Logger logger = LoggerFactory.getLogger(AuthFailHandler.class);
 
+	static final String AUTH_FAIL_EXCEPTION = "__auth_fail_exception";
+
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request,
 										HttpServletResponse response,
 										AuthenticationException exception) throws IOException, ServletException {
 		logger.debug(" AuthFailHandler [onAuthenticationFailure]  {}  {}", exception.getMessage(), exception.getClass().getSimpleName());
+		request.setAttribute(AUTH_FAIL_EXCEPTION, exception);
+		//NOT write Response Here , Response can be write in NotLoginHandler.java
 	}
 
 }

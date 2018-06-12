@@ -5,6 +5,7 @@ import com.example.slyangsecurity.common.utils.R;
 import com.example.slyangsecurity.common.utils.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -27,7 +28,13 @@ public class NotLoginHandler implements AuthenticationEntryPoint {
 						 HttpServletResponse response,
 						 AuthenticationException authException) throws IOException, ServletException {
 		logger.debug(" NotLoginHandler [commence]  {}  {}", authException.getMessage(), authException.getClass().getSimpleName());
-		//todo case 凭证失效，账号锁定...
-		WebUtil.writeJSON(R.errorGlobal(GlobalCode.USER_NOT_LOGIN), response);
+		Exception exception = (Exception) request.getAttribute(AuthFailHandler.AUTH_FAIL_EXCEPTION);
+		if (exception != null) {
+			//todo case 凭证失效，账号锁定...
+			WebUtil.writeJSON(R.errorGlobal(GlobalCode.AUTH_NOT_SUCCESS), response);
+		} else {
+			WebUtil.writeJSON(R.errorGlobal(GlobalCode.USER_NOT_LOGIN), response);
+		}
 	}
+
 }
