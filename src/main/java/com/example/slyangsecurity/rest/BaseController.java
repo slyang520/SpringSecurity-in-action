@@ -11,7 +11,7 @@ public abstract class BaseController {
 	protected Object getUser() throws GlobalException {
 		Authentication authentication =
 				SecurityContextHolder.getContext().getAuthentication();
-		if (authentication instanceof PreAuthenticatedAuthenticationToken) {
+		if (authentication != null && authentication instanceof PreAuthenticatedAuthenticationToken) {
 			return authentication.getDetails();
 		} else {
 			throw new GlobalException(GlobalCode.USER_NOT_LOGIN);

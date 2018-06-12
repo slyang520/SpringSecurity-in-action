@@ -11,9 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 public class TokenAuthUserService
 		implements
@@ -48,9 +46,12 @@ public class TokenAuthUserService
 			logger.debug("验证身份通过：{}> " + headerToken);
 		}
 
-		// todo
 		// to set userDetails
-		//token.setDetails();
+		Map<String,Object> test = new HashMap();
+		test.put("test","ff");
+		test.put("test1","1ff");
+		test.put("test2","2ff");
+		token.setDetails(test);
 
 		return user;
 	}

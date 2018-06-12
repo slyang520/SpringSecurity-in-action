@@ -1,13 +1,16 @@
 package com.example.slyangsecurity.rest;
 
 
+import com.example.slyangsecurity.common.exception.GlobalException;
 import com.example.slyangsecurity.common.utils.R;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SecurityController {
+public class SecurityController extends BaseController {
 
 	/**
 	 * URL 权限验证部分
@@ -19,8 +22,9 @@ public class SecurityController {
 
 	@PreAuthorize("hasRole('USER')")
 	@GetMapping(value = "/test2")
-	public R testRoleUser() {
-		return R.ok("testRoleUser");
+	public R testRoleUser() throws GlobalException, JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return R.ok("testRoleUser	" + objectMapper.writeValueAsString(getUser()));
 	}
 
 	@PreAuthorize("hasRole('ADMIN')")
