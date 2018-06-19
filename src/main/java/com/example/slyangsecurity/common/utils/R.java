@@ -1,5 +1,6 @@
 package com.example.slyangsecurity.common.utils;
 
+import com.example.slyangsecurity.common.exception.GlobalCode;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class R {
@@ -20,11 +21,20 @@ public class R {
 		return r;
 	}
 
-	public static R errorLocal(int code, String message) {
+	public static R errorBusiness(int code, String message) {
 		R r = new R(GlobalCode.SUCCESS);
 		r.setData(new Data());
 		r.getData().setCode(code);
 		r.getData().setMessage(message);
+		return r;
+	}
+
+	public static R errorBusiness(int code, String message, Object data) {
+		R r = new R(GlobalCode.SUCCESS);
+		r.setData(new Data());
+		r.getData().setCode(code);
+		r.getData().setMessage(message);
+		r.getData().setData(data);
 		return r;
 	}
 

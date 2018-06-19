@@ -1,5 +1,5 @@
 
-package com.example.slyangsecurity.common.utils;
+package com.example.slyangsecurity.common.exception;
 
 public enum GlobalCode {
 

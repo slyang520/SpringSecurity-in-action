@@ -1,11 +1,10 @@
 package com.example.slyangsecurity.config.security;
 
-import com.example.slyangsecurity.common.utils.GlobalCode;
+import com.example.slyangsecurity.common.exception.GlobalCode;
 import com.example.slyangsecurity.common.utils.R;
 import com.example.slyangsecurity.common.utils.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 

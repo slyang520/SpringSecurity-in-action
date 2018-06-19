@@ -1,7 +1,6 @@
 package com.example.slyangsecurity.common.exception;
 
 
-import com.example.slyangsecurity.common.utils.GlobalCode;
 import com.example.slyangsecurity.common.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +25,11 @@ public class GlobalExceptionHandler {
 		return R.errorGlobal(GlobalCode.SERVER_ERROR);
 	}
 
-	@ExceptionHandler(value = LocalException.class)
+	@ExceptionHandler(value = BusinessException.class)
 	@ResponseBody
-	public R apiLocalErrorHandler(LocalException e) throws Exception {
-		logger.info("apiErrorHandler   LocalException {} ", e.getMessage());
-		return R.errorLocal(e.getCode(), e.getMessage());
+	public R apiLocalErrorHandler(BusinessException e) throws Exception {
+		logger.info("apiErrorHandler   BusinessException {} ", e.getMessage());
+		return R.errorBusiness(e.getCode(), e.getMessage(), e.getData());
 	}
 
 	@ExceptionHandler(value = GlobalException.class)

@@ -1,7 +1,7 @@
 package com.example.slyangsecurity.rest;
 
 import com.example.slyangsecurity.common.exception.GlobalException;
-import com.example.slyangsecurity.common.utils.GlobalCode;
+import com.example.slyangsecurity.common.exception.GlobalCode;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;

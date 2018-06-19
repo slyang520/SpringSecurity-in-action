@@ -1,6 +1,6 @@
 package com.example.slyangsecurity.config.security;
 
-import com.example.slyangsecurity.common.utils.GlobalCode;
+import com.example.slyangsecurity.common.exception.GlobalCode;
 import com.example.slyangsecurity.common.utils.R;
 import com.example.slyangsecurity.common.utils.WebUtil;
 import org.slf4j.Logger;
