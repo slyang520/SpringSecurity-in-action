@@ -2,16 +2,19 @@
 <#include "header.ftl">
 <#assign ctx=request.contextPath/>
 <#--
-  page_css 当前页面JS
-  page_css 当前页面CSS全路径
+  page_placeholder_footers 当前页面JS[]
+  page_placeholder_headers 当前页面CSS[]
   page_title 当前页面需要显示的标题
   page_metas 当前页面的meta
 -->
-<#macro html page_js="" page_css="" page_title="" page_metas=[]>
+<#macro html page_placeholder_headers=[] page_placeholder_footers=[] page_title="" page_metas=[]>
 <!doctype html>
 <html lang="zh-CN">
 <head>
     <title>${page_title}</title>
+    <link rel="icon" type="image/x-icon" >
+    <link rel="icon" href="${ctx}/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <#list page_metas as meta>
@@ -20,9 +23,9 @@
     <#--公共样式部分-->
     <link href="${ctx}/css/bootstrap.css" rel="stylesheet">
     <#--当前页面css部分-->
-    <#if page_css!="">
-        <link href="${page_css}" rel="stylesheet">
-    </#if>
+    <#list page_placeholder_headers as placeholder_header>
+        ${placeholder_header}
+    </#list>
     <#--公共JS部分 -->
     <script src="${ctx}/js/jquery.js"></script>
 </head>
@@ -34,9 +37,9 @@
 </div>
     <@footer/>
     <#--当前页面JS部分-->
-    <#if page_js!="">
-        <script src="${page_js}"></script>
-    </#if>
+    <#list page_placeholder_footers as placeholder_footer>
+        ${placeholder_footer}
+    </#list>
 </body>
 </html>
 </#macro>
