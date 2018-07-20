@@ -1,6 +1,7 @@
-<#include "layout/layout.ftl">
+<#import "layout/layout.ftl" as layout_namespace>
+<#assign ctx=request.contextPath/>
 
-<@html
+<@layout_namespace.html
 page_title="我的Index页面"
 page_metas=[
 '<meta http-equiv="expires" content="31 Dec 2008">',
@@ -17,4 +18,4 @@ page_placeholder_footers=[
     <p>hello</p>
 </div>
 
-</@html>
+</@layout_namespace.html>

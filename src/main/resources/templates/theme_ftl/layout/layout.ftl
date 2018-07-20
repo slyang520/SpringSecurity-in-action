@@ -1,5 +1,7 @@
-<#include "footer.ftl">
-<#include "header.ftl">
+<#import "header.ftl" as header_namespace>
+<#import "footer.ftl" as footer_namespace>
+<#import "error.ftl" as error_namespace>
+
 <#assign ctx=request.contextPath/>
 <#--
   page_placeholder_footers 当前页面JS[]
@@ -31,11 +33,16 @@
 </head>
 <body>
 <div class="wrapper">
-    <@header/>
+    <@header_namespace.header/>
     <#-- 自定义内容部分,会被插入 -->
-    <#nested />
+    <#attempt>
+        <#nested />
+        <#recover>
+        <#-- 错误处理 -->
+        <@error_namespace.error/>
+    </#attempt>
 </div>
-    <@footer/>
+    <@footer_namespace.footer/>
     <#--当前页面JS部分-->
     <#list page_placeholder_footers as placeholder_footer>
         ${placeholder_footer}
