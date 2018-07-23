@@ -14,7 +14,8 @@ import java.util.Map;
 public class FtlController {
 
 	private String getTheme(String url) {
-		return "theme_ftl/" + url;
+		//return "theme_ftl/" + url;
+		return  url;
 	}
 
 	@RequestMapping("")
