@@ -48,6 +48,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-freemarker')
+	compile("org.springframework.boot:spring-boot-devtools")
 
 	compile 'org.hyperledger.fabric-sdk-java:fabric-sdk-java:1.1.0'
 	compile 'io.grpc:grpc-netty:1.13.1'

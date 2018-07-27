@@ -80,7 +80,7 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/**/*.js", "/**/*.css","/**/*.css.map", "/**/*.ico", "/**/*.jpg", "/**/*.png").permitAll()
+				.antMatchers("/**/*.js", "/**/*.css","/**/*.css.map", "/**/*.ico", "/**/*.jpg", "/**/*.png","/**/*.woff2","/**/*.woff","/**/*.eot","/**/*.svg","/**/*.ttf").permitAll()
 				.antMatchers(
 						"/",
 						"/ftl","/ftl/**/*",

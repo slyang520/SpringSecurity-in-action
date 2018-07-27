@@ -8,10 +8,10 @@ page_metas=[
 '<meta name="keywords" content="Spring boot,Spring cloud">'
 ]
 page_placeholder_headers=[
-'<link href="${ctx}/css/app/index.css" rel="stylesheet">'
+'<link href="${ctx}/app/css/ftl/index.css" rel="stylesheet">'
 ]
 page_placeholder_footers=[
-'<script src="${ctx}/js/app/index.js"></script>'
+'<script src="${ctx}/app/js/ftl/index.js"></script>'
 ]
 >
 <div class="test_css" style="padding: 50px 0">

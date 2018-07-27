@@ -23,13 +23,29 @@
         ${meta}
     </#list>
     <#--公共样式部分-->
-    <link href="${ctx}/css/bootstrap.css" rel="stylesheet">
+    <link href="${ctx}/bootstrapV3_3_7/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        @font-face {
+            font-family: 'Glyphicons Halflings';
+            src: url('${ctx}/bootstrapV3_3_7/fonts/glyphicons-halflings-regular.eot');
+            src: url('${ctx}/bootstrapV3_3_7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+            url('${ctx}/bootstrapV3_3_7/fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+            url('${ctx}/bootstrapV3_3_7/fonts/glyphicons-halflings-regular.woff') format('woff'),
+            url('${ctx}/bootstrapV3_3_7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+            url('${ctx}/bootstrapV3_3_7/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+        }
+    </style>
     <#--当前页面css部分-->
     <#list page_placeholder_headers as placeholder_header>
         ${placeholder_header}
     </#list>
     <#--公共JS部分 -->
-    <script src="${ctx}/js/jquery.js"></script>
+    <#-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <#-- jQuery 1.x 兼容IE8 -->
+    <script src="${ctx}/jqueryV1_12_4/jquery.min.js"></script>
+    <#-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="${ctx}/bootstrapV3_3_7/js/bootstrap.min.js"></script>
+    
 </head>
 <body>
 <div class="wrapper">
