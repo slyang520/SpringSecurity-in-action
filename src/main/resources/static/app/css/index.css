@@ -1,0 +1,11 @@
+.content-swiper {
+    position: relative;
+}
+
+.content-swiper img{
+    display: inline-block;width: 100%;
+}
+
+.content-swiper .swiper-guide{
+    position: absolute; bottom:20px;
+}

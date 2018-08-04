@@ -8,14 +8,23 @@ page_metas=[
 '<meta name="keywords" content="Spring boot,Spring cloud">'
 ]
 page_placeholder_headers=[
-'<link href="${ctx}/app/css/ftl/index.css" rel="stylesheet">'
+'<link href="${ctx}/app/css/index.css" rel="stylesheet">'
 ]
 page_placeholder_footers=[
-'<script src="${ctx}/app/js/ftl/index.js"></script>'
+'<script src="${ctx}/app/js/index.js"></script>'
 ]
 >
-<div class="test_css" style="padding: 50px 0">
-    <p>hello</p>
+<div class="content-swiper">
+    <img src="${ctx}/app/img/index/banner2.jpg"/>
+    <div class="swiper-guide">
+        <div>fdsf</div>
+        <h1>hello</h1>
+        <h2>hello</h2>
+        <h3>hello</h3>
+        <h4>hello</h4>
+        <h5>hello</h5>
+        <h6>hello</h6>
+    </div>
 </div>
 
 </@layout_namespace.html>

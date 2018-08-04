@@ -1,14 +1,6 @@
-package com.example.slyangsecurity.rest;
+package com.example.slyangsecurity.web.rest;
 
-import com.example.slyangsecurity.common.utils.R;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.Servlet;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 
 @RestController
 public class LoginController {
