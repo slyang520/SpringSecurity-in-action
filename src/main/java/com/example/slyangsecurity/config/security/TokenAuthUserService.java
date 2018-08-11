@@ -30,7 +30,7 @@ public class TokenAuthUserService
 
 		//Mock
 		Collection<? extends GrantedAuthority> authorities = new HashSet<>(Arrays.asList(
-				new SimpleGrantedAuthority("ROLE_ADMIN"),
+//				new SimpleGrantedAuthority("ROLE_ADMIN"),
 				new SimpleGrantedAuthority("ROLE_USER"),
 				new SimpleGrantedAuthority("user:select"),
 				new SimpleGrantedAuthority("user:add"),
