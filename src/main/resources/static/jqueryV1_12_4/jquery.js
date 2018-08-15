@@ -3642,7 +3642,7 @@
                 // A fallback to window.onload, that will always work
                 window.addEventListener( "load", completed );
 
-                // If IE event model is used
+                // If IE event entity is used
             } else {
 
                 // Ensure firing before onload, maybe late but safe also for iframes
@@ -7022,7 +7022,7 @@
             val = parseFloat( val ) || 0;
         }
 
-        // use the active box-sizing model to add/subtract irrelevant styles
+        // use the active box-sizing entity to add/subtract irrelevant styles
         return ( val +
             augmentWidthOrHeight(
                 elem,

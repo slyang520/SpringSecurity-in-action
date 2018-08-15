@@ -56,8 +56,7 @@ dependencies {
 	compile 'org.slf4j:log4j-over-slf4j:1.7.21'
 	compile 'com.alibaba:fastjson:1.2.44'
 
-	//compile 'com.baomidou:mybatisplus-spring-boot-starter:1.0.5'
-	compile 'com.baomidou:mybatis-plus:2.1.9'
+	compile("com.baomidou:mybatis-plus-boot-starter:3.0-RC2")
 	compile 'mysql:mysql-connector-java:5.1.38'
 }
 

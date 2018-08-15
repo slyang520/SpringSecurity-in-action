@@ -2,56 +2,42 @@
 
 package com.example.slyangsecurity.web.page;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 
-@Controller
-@RequestMapping("${server.error.path:${error.path:/error}}")
-public class ErrorPageController implements ErrorController {
+@Component
+public class ErrorPageController extends BasicErrorController {
 
-    private Logger logger = LoggerFactory.getLogger(ErrorPageController.class);
-
-    @RequestMapping
-    public String errorHtml(HttpServletRequest request,
-                            HttpServletResponse response) {
-        HttpStatus status = getStatus(request);
-        response.setStatus(status.value());
-        int http_code = status.value();
-
-        logger.info("errorHtml http_status ={}", http_code);
-
-        if (http_code == HttpStatus.NOT_FOUND.value()) {
-            return "404.html";
-        } else if (http_code >= 400 && http_code < 500) {
-            return "40x.html";
-        }
-        return "50X.html";
+    public ErrorPageController(ServerProperties serverProperties) {
+        super(new DefaultErrorAttributes(), serverProperties.getError());
     }
-
-    private HttpStatus getStatus(HttpServletRequest request) {
-        Integer statusCode = (Integer) request
-                .getAttribute("javax.servlet.error.status_code");
-        if (statusCode == null) {
-            return HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        try {
-            return HttpStatus.valueOf(statusCode);
-        } catch (Exception ex) {
-            return HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-    }
-
 
     @Override
-    public String getErrorPath() {
-        return null;
+    public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
+        return super.errorHtml(request, response);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+        Map<String, Object> body = getErrorAttributes(request,
+                isIncludeStackTrace(request, MediaType.ALL));
+        HttpStatus status = getStatus(request);
+        //输出自定义的Json格式
+        Map<String, Object> map = new HashMap<>();
+        map.put("code", status.value());
+        map.put("desc", body.get("message"));
+        return new ResponseEntity<>(map, status);
     }
 }
