@@ -11,7 +11,7 @@ import org.junit.Test;
 public class MybatisGenerator {
 
     private final static String PACKAGE_NAME = "com.example.slyangsecurity.modules.block";
-    private final static String DB_URL = "jdbc:mysql://localhost:3306/hyht_blockchain";
+    private final static String DB_URL = "jdbc:mysql://localhost:3306/hyht_blockchain?useSSL=true";
     private final static String DB_DRIVER = "com.mysql.jdbc.Driver";
     private final static String DB_USERNAME = "root";
     private final static String DB_PASSWORD = "123456";

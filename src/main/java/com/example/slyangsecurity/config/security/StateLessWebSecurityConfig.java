@@ -86,6 +86,7 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 						"/ftl","/ftl/**/*",
 						"/test1",
 						"/stateless.html",
+						"/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html",
 						"/login**").permitAll()
 				.antMatchers("/admin/**", "/test4").hasRole("ADMIN")
 				.anyRequest().authenticated();
