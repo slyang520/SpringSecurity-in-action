@@ -2,6 +2,8 @@ package com.example.slyangsecurity;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.slyangsecurity.modules.block.dao.BcChaincodeMapper;
@@ -16,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -104,10 +107,6 @@ public class MybatisTestCase {
     }
 
     @Test
-    public void helloUpdate() {
-    }
-
-    @Test
     @Transactional
     public void helloTransactions() {
 
@@ -128,12 +127,74 @@ public class MybatisTestCase {
         throw new RuntimeException("fdsfdsf");
     }
 
-
     @Test
     public void helloPrimarykey() {
 
         TestTable testTable = new TestTable().setTt("fdsfdsf");
         testTableMapper.insert(testTable);
     }
+
+    @Test
+    public void helloUpdate() {
+
+        BcChaincode chaincode = bcChaincodeMapper.selectById("1");
+        bcChaincodeMapper.updateById(chaincode);
+
+        // UPDATE bc_chaincode SET name=?, path=?, version=?, channel_id=?, date_test=? WHERE id=?
+        //==> Parameters: fdfdf(String), ffsdffdsfs(String), 1.3(String), 666(Integer), null, 1(Integer)
+        //  UPDATE bc_chaincode SET name='fdfdf', path='ffsdffdsfs', version='1.3', channel_id=666, date_test=null WHERE id=1
+
+
+        LambdaUpdateWrapper<BcChaincode> wrappe6r = new UpdateWrapper<BcChaincode>().lambda();
+        wrappe6r.eq(BcChaincode::getVersion, "1.35");
+
+        BcChaincode chaincode2 = new BcChaincode();
+        chaincode2.setVersion("1.36");
+        bcChaincodeMapper.update(chaincode2, wrappe6r);
+
+        // UPDATE bc_chaincode SET version=?, date_test=? WHERE version = ?
+        // Parameters: 1.36(String), null, 1.35(String)
+        // UPDATE bc_chaincode SET version='1.36', date_test=null WHERE version = '1.35'
+
+
+        BcChaincode chaincode3 = new BcChaincode();
+        LambdaUpdateWrapper<BcChaincode> updateWrapper = new UpdateWrapper<BcChaincode>().lambda();
+        updateWrapper.set(BcChaincode::getChannelId, null).eq(BcChaincode::getId, 1);
+
+        bcChaincodeMapper.update(chaincode3, updateWrapper);
+
+        // UPDATE bc_chaincode SET date_test=?, channel_id=? WHERE id = ?
+        // Parameters: null, null, 1(Integer)
+        // UPDATE bc_chaincode SET date_test=null, channel_id=null WHERE id = 1
+    }
+
+    @Test
+    public void helloDel(){
+
+        bcChaincodeMapper.deleteById(2);
+        // DELETE FROM bc_chaincode WHERE id=?
+        // Parameters: 1(Integer)
+        // DELETE FROM bc_chaincode WHERE id=1
+
+        LambdaQueryWrapper<BcChaincode> wrappe3r = new QueryWrapper<BcChaincode>().lambda();
+        wrappe3r.eq(BcChaincode::getVersion, "1.3");
+        bcChaincodeMapper.delete(wrappe3r);
+        // DELETE FROM bc_chaincode WHERE version = ?
+        // Parameters: 1.3(String)
+        // DELETE FROM bc_chaincode WHERE version = '1.3'
+
+        Map<String,Object> objectMap = new HashMap<>();
+        objectMap.put("version","1.4");
+        bcChaincodeMapper.deleteByMap(objectMap);
+        // DELETE FROM bc_chaincode WHERE version = '1.4'
+    }
+
+    @Test
+    public void LogicDel(){
+        // TableLogic 逻辑删除实例 todo
+        // Version todo
+        // SqlParser todo
+    }
+
 
 }

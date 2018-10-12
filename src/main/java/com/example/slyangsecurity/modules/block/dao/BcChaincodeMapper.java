@@ -4,6 +4,7 @@ package com.example.slyangsecurity.modules.block.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.slyangsecurity.modules.block.entity.BcChaincode;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author author slyang
  * @since 2018-08-14
  */
-@Mapper
+@Repository
 public interface BcChaincodeMapper extends BaseMapper<BcChaincode> {
 
 }

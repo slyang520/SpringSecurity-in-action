@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import org.junit.Test;
 
 public class MybatisGenerator {
@@ -16,7 +18,7 @@ public class MybatisGenerator {
     private final static String DB_USERNAME = "root";
     private final static String DB_PASSWORD = "123456";
 
-    private final static String CREATE_TABLE_NAME = "test_table";
+    private final static String CREATE_TABLE_NAME = "bc_chaincode";
 
     @Test
     public void generateCode() {
@@ -25,11 +27,15 @@ public class MybatisGenerator {
     }
 
     private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
+
         GlobalConfig config = new GlobalConfig()
                 .setActiveRecord(false)
                 .setAuthor("author slyang")
+                .setDateType(DateType.ONLY_DATE)
                 .setOutputDir("generate")
+                //.setIdType(IdType.UUID)  主键生成
                 .setServiceName("%sService")
+                .setEntityName("%sEntity")
                 .setFileOverride(true);
 
         DataSourceConfig dataSourceConfig = new DataSourceConfig()
@@ -39,14 +45,17 @@ public class MybatisGenerator {
                 .setDriverName(DB_DRIVER);
 
         StrategyConfig strategyConfig = new StrategyConfig()
-                .entityTableFieldAnnotationEnable(true)
-                .setCapitalMode(true)
-                .setEntityBuilderModel(true)
-                .setDbColumnUnderline(false)
-                .setNaming(NamingStrategy.underline_to_camel)
+                .entityTableFieldAnnotationEnable(true) // 生成 字段注解
+                .setCapitalMode(false)    // 是否大写命名 ? TODO
+                .setEntityBuilderModel(true)  // 对象为建造者模型
+                .setRestControllerStyle(true)  // restcontroller
+                .setNaming(NamingStrategy.underline_to_camel) // 下划线转驼峰命名 表名
+                .setColumnNaming(NamingStrategy.underline_to_camel) // 下划线转驼峰命名 字段名
                 .setInclude(tableNames);//修改替换成你需要的表名，多个表名传数组
-        
-        new AutoGenerator().setGlobalConfig(config)
+
+        new AutoGenerator()
+                .setTemplateEngine(new FreemarkerTemplateEngine())
+                .setGlobalConfig(config)
                 .setDataSource(dataSourceConfig)
                 .setStrategy(strategyConfig)
                 .setPackageInfo(
