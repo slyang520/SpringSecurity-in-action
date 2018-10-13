@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -190,10 +191,21 @@ public class MybatisTestCase {
     }
 
     @Test
-    public void LogicDel(){
-        // TableLogic 逻辑删除实例 todo
-        // Version todo
-        // SqlParser todo
+    public void caseLock(){ // 乐观锁 悲观锁
+
+        //  乐观锁 
+        BcChaincode chaincode = bcChaincodeMapper.selectById(3);
+
+        LambdaUpdateWrapper<BcChaincode> wrappe4r = new UpdateWrapper<BcChaincode>().lambda();
+
+        wrappe4r.set(BcChaincode::getDateTest,new Date())
+                .eq(BcChaincode::getId, chaincode.getId())
+                .eq(BcChaincode::getDateTest, chaincode.getDateTest());
+
+        int result = bcChaincodeMapper.update(new BcChaincode(), wrappe4r);
+
+        //  悲观锁
+
     }
 
 
