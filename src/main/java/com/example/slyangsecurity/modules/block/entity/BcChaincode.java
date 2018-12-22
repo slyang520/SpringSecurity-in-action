@@ -63,6 +63,11 @@ public class BcChaincode implements Serializable {
     @TableField(value = "date_test",fill = FieldFill.INSERT_UPDATE)
     private Date dateTest;
 
+    @TableLogic
+    @TableField("deleted")
+    private Integer deleted;
+    
+
     public String getName() {
         return name;
     }

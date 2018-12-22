@@ -2,5 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.slyangsecurity.modules.block.dao.BcChaincodeMapper">
 
+    <select id="seletMapTest" resultType="java.util.Map">
+        select 1 as test_type
+    </select>
 
 </mapper>

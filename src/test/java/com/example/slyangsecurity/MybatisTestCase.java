@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.toolkit.SqlRunner;
 import com.example.slyangsecurity.modules.block.dao.BcChaincodeMapper;
 import com.example.slyangsecurity.modules.block.dao.TestTableMapper;
 import com.example.slyangsecurity.modules.block.entity.BcChaincode;
@@ -169,10 +171,16 @@ public class MybatisTestCase {
         // UPDATE bc_chaincode SET date_test=null, channel_id=null WHERE id = 1
     }
 
+    /**
+     * 逻辑删除测试（注意一定要有默认值）
+     * UPDATE bc_chaincode SET deleted=1 WHERE id=? AND deleted=0
+     * bcChaincodeMapper.deleteById(4);
+     */
     @Test
-    public void helloDel(){
+    public void helloDel() {
 
-        bcChaincodeMapper.deleteById(2);
+        // UPDATE bc_chaincode SET deleted=1 WHERE id=? AND deleted=0
+        bcChaincodeMapper.deleteById(4);
         // DELETE FROM bc_chaincode WHERE id=?
         // Parameters: 1(Integer)
         // DELETE FROM bc_chaincode WHERE id=1
@@ -184,27 +192,54 @@ public class MybatisTestCase {
         // Parameters: 1.3(String)
         // DELETE FROM bc_chaincode WHERE version = '1.3'
 
-        Map<String,Object> objectMap = new HashMap<>();
-        objectMap.put("version","1.4");
+        Map<String, Object> objectMap = new HashMap<>();
+        objectMap.put("version", "1.4");
         bcChaincodeMapper.deleteByMap(objectMap);
         // DELETE FROM bc_chaincode WHERE version = '1.4'
     }
 
     @Test
-    public void caseLock(){ // 乐观锁 悲观锁
+    public void caseLock() { // 乐观锁 悲观锁
 
         //  乐观锁 
         BcChaincode chaincode = bcChaincodeMapper.selectById(3);
 
         LambdaUpdateWrapper<BcChaincode> wrappe4r = new UpdateWrapper<BcChaincode>().lambda();
 
-        wrappe4r.set(BcChaincode::getDateTest,new Date())
+        wrappe4r.set(BcChaincode::getDateTest, new Date())
                 .eq(BcChaincode::getId, chaincode.getId())
                 .eq(BcChaincode::getDateTest, chaincode.getDateTest());
 
         int result = bcChaincodeMapper.update(new BcChaincode(), wrappe4r);
 
         //  悲观锁
+
+    }
+
+    @Test
+    public void idWork() {
+
+        System.out.println(IdWorker.getIdStr());
+        System.out.println(IdWorker.getIdStr());
+        System.out.println(IdWorker.get32UUID());
+        System.out.println(IdWorker.get32UUID());
+
+    }
+
+    //  map-underscore-to-camel-case: true
+    //  Map下划线自动转驼峰
+    //  resultType="java.util.Map"
+    //  不开启的情况
+    //  比如 mysql 原样返回 select test_type from xxx -> test_type:1
+    //  Oracle 只返回全大写 select test_type from xxx -> TEST_TYPE:1
+    //  开启的情况
+    //  只要是下划线命名的 结果集都是 testType
+    //  和文档不一致 BUG todo
+    @Test
+    public void mapUnderScoreToCamelCase() {
+        List<Map<String, Object>> object = SqlRunner.DEFAULT.selectList("select 1 as test_type");
+        Map<String, Object> test2 = bcChaincodeMapper.seletMapTest();
+        System.out.println(object);
 
     }
 

@@ -6,6 +6,8 @@ import com.example.slyangsecurity.modules.block.entity.BcChaincode;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+
 /**
  * <p>
  * 区块链_链码 Mapper 接口
@@ -16,5 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BcChaincodeMapper extends BaseMapper<BcChaincode> {
+
+    Map<String,Object> seletMapTest();
 
 }
