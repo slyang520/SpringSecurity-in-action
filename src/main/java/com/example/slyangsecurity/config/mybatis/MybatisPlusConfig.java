@@ -43,11 +43,6 @@ public class MybatisPlusConfig {
         return new LogicSqlInjector();
     }
 
-    @Bean
-    public H2KeyGenerator getH2KeyGenerator() {
-        return new H2KeyGenerator();
-    }
-
 
     /**
      * 性能分析拦截器，不建议生产使用

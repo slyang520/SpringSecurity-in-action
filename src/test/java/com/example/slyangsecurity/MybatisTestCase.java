@@ -226,20 +226,20 @@ public class MybatisTestCase {
 
     }
 
-    //  map-underscore-to-camel-case: true
-    //  Map下划线自动转驼峰
-    //  resultType="java.util.Map"
-    //  不开启的情况
-    //  比如 mysql 原样返回 select test_type from xxx -> test_type:1
-    //  Oracle 只返回全大写 select test_type from xxx -> TEST_TYPE:1
-    //  开启的情况
-    //  只要是下划线命名的 结果集都是 testType
-    //  和文档不一致 BUG todo
+    // map-underscore-to-camel-case: true
     @Test
     public void mapUnderScoreToCamelCase() {
-        List<Map<String, Object>> object = SqlRunner.DEFAULT.selectList("select 1 as test_type");
+
+        // 对象下划线转驼峰  map-underscore-to-camel-case=true
+        // channel_id, date_test
+        // 自动转换对象的  channelId  dateTest
+        // (map类型不会自动转换)
+        List<BcChaincode> test3 = bcChaincodeMapper.selectListTest();
+
+
+        // 测试map 类型转换(test_type testType ) (不生效 要配置 MybatisMapWrapperFactory)
         Map<String, Object> test2 = bcChaincodeMapper.seletMapTest();
-        System.out.println(object);
+        List<Map<String, Object>> object = SqlRunner.DEFAULT.selectList("select 1 as test_type");
 
     }
 

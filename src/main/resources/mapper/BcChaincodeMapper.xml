@@ -6,4 +6,8 @@
         select 1 as test_type
     </select>
 
+    <select id="selectListTest" resultType="com.example.slyangsecurity.modules.block.entity.BcChaincode">
+        select channel_id, date_test from bc_chaincode limit 10
+    </select>
+
 </mapper>

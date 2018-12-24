@@ -157,5 +157,18 @@ public class EsRestClientTest {
         log.info(result.toString());
     }
 
+    // Query BoolQuery  todo
+    @Test
+    public void SearchBoolQuery() throws IOException {
+    }
+
+
+    // Aggregation 聚合查询
+    @Test
+    public void AggregationsTest() throws IOException {
+
+
+    }
+
 
 }
