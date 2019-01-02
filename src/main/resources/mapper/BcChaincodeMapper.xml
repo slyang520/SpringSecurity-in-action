@@ -10,4 +10,94 @@
         select channel_id, date_test from bc_chaincode limit 10
     </select>
 
+
+    <!-- 字符串 ""  字符是 ''    -->
+    <select id="seltSt" resultType="map">
+        select channel_id, date_test from bc_chaincode
+        where 1 =1
+        <if test='str_test == "3" '>
+            and 1 =3
+        </if>
+        <if test='str_test != "3" '>
+            and  1 = 2
+        </if>
+
+        <if test="str_test == '3'.toString()">
+            and 1 =6
+        </if>
+        <if test="str_test!= '3'.toString()">
+            and 1 =4
+        </if>
+
+        <if test="str_test.length() == 1">
+            and 1 =9
+        </if>
+
+        <if test="int_test == 3">
+            limit 3
+        </if>
+        <if test="int_test!=3">
+            limit 1
+        </if>
+
+    </select>
+
+
+    <!--
+    id元素 ，用于设置主键字段与领域模型属性的映射关系
+    result元素 ，用于设置普通字段与领域模型属性的映射关系
+
+    association 元素,  用于一对一
+    //  select=”selectXXX” 嵌套的查询
+    //  resultMap=”authorResult”  resultMap 复用
+
+    collection 元素，  用于一对多
+     //  select=”selectXXX” 嵌套的查询
+     //  resultMap=”authorResult”  resultMap 复用
+
+    Discriminator 辨别器元素
+
+
+
+
+    public class A  {
+        private B b1;
+        private List<C> c1;
+    }
+
+    在映射b1属性时用association标签,
+    映射c1时用collection标签，
+    分别是一对一，一对多的关系
+
+
+    -->
+    <resultMap id="UserRoleMap" type="com.example.slyangsecurity.modules.block.entity.UserRole">
+        <id  property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userphone" column="user_phone"/>
+
+        <collection property="roles" ofType="com.example.slyangsecurity.modules.block.entity.Role">
+            <id property="roleId" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+        </collection>
+
+        <!--<association property="role" javaType="com.example.slyangsecurity.modules.block.entity.Role">-->
+            <!--<id property="roleId" column="role_id"/>-->
+            <!--<result property="roleName" column="role_name"/>-->
+        <!--</association>-->
+    </resultMap>
+
+    <select id="seltMuitTable" resultMap="UserRoleMap">
+        select
+          t1.user_id,
+          t1.user_name,
+          t1.user_phone,
+          t3.role_id,
+          t3.role_name
+        from
+          sly_user t1
+          left join sly_user_role t2 on t1.user_id = t2.user_id
+          left join sly_role t3 on t2.role_id = t3.role_id
+    </select>
+
 </mapper>

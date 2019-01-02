@@ -12,6 +12,7 @@ import com.example.slyangsecurity.modules.block.dao.BcChaincodeMapper;
 import com.example.slyangsecurity.modules.block.dao.TestTableMapper;
 import com.example.slyangsecurity.modules.block.entity.BcChaincode;
 import com.example.slyangsecurity.modules.block.entity.TestTable;
+import com.example.slyangsecurity.modules.block.entity.UserRole;
 import com.example.slyangsecurity.modules.block.service.BcChaincodeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,6 +111,18 @@ public class MybatisTestCase {
     }
 
     @Test
+    public void helloSelectCase() {
+
+        List<UserRole> userRoles= bcChaincodeMapper.seltMuitTable();
+
+        Map<String,Object> para = new HashMap<>();
+        para.put("int_test",3);   // 数字类型
+        para.put("str_test","3");   // 数字类型
+        bcChaincodeMapper.seltSt(para);
+
+    }
+    
+    @Test
     @Transactional
     public void helloTransactions() {
 
@@ -129,6 +142,37 @@ public class MybatisTestCase {
 
         throw new RuntimeException("fdsfdsf");
     }
+
+
+    /**
+     * 事务详解
+     *
+     * 1. 作用范围
+     * 标注在类前：标示类中所有方法都进行事务处理
+     * 标注在接口、实现类的方法前：标示方法进行事务处理
+     *
+     * 2. 传播行为
+     *   2.1 @Transactional(propagation=Propagation.REQUIRED)  如果有事务,那么加入事务,没有的话新建一个(默认情况)
+     *   2.2 @Transactional(propagation=Propagation.NOT_SUPPORTED)	容器不为这个方法开启事务
+     *   2.3 @Transactional(propagation=Propagation.REQUIRES_NEW)   不管是否存在事务，都创建一个新的事务，原来的挂起，新的执行完毕，继续执行老的事务
+     *   2.4 @Transactional(propagation=Propagation.MANDATORY) 必须在一个已有的事务中执行，否则抛出异常
+     *   2.5 @Transactional(propagation=Propagation.NEVER)	必须在一个没有的事务中执行，否则抛出异常(与Propagation.MANDATORY相反)
+     *   2.6 @Transactional(propagation=Propagation.SUPPORTS)  如果其他bean调用这个方法，在其他bean中声明事务，那就用事务。如果其他bean没有声明事务，那就不用事务
+     *
+     * 3. 事务隔离级别
+     * todo
+     *   3.1 @Transactional(isolation = Isolation.READ_UNCOMMITTED)	 读取未提交数据(会出现脏读， 不可重复读)，基本不使用
+     *   3.2 @Transactional(isolation = Isolation.READ_COMMITTED) 读取已提交数据(会出现不可重复读和幻读)
+     *   3.3 @Transactional(isolation = Isolation.REPEATABLE_READ)	可重复读(会出现幻读)
+     *   3.4 @Transactional(isolation = Isolation.SERIALIZABLE)	 串行化
+     *
+     */
+    @Test
+    @Transactional
+    public void helloTransactionsDetail() {
+
+    }
+
 
     @Test
     public void helloPrimarykey() {
@@ -201,7 +245,7 @@ public class MybatisTestCase {
     @Test
     public void caseLock() { // 乐观锁 悲观锁
 
-        //  乐观锁 
+        //  乐观锁
         BcChaincode chaincode = bcChaincodeMapper.selectById(3);
 
         LambdaUpdateWrapper<BcChaincode> wrappe4r = new UpdateWrapper<BcChaincode>().lambda();

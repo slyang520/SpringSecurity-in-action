@@ -3,6 +3,7 @@ package com.example.slyangsecurity.modules.block.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.slyangsecurity.modules.block.entity.BcChaincode;
+import com.example.slyangsecurity.modules.block.entity.UserRole;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,5 +23,9 @@ public interface BcChaincodeMapper extends BaseMapper<BcChaincode> {
     Map<String,Object> seletMapTest();
 
     List<BcChaincode> selectListTest();
+
+    List<Map<String,Object>> seltSt(Map para);
+
+    List<UserRole> seltMuitTable();
 
 }
