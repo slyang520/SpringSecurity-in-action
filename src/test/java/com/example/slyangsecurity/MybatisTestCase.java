@@ -161,15 +161,48 @@ public class MybatisTestCase {
      *
      * 3. 事务隔离级别
      * todo
-     *   3.1 @Transactional(isolation = Isolation.READ_UNCOMMITTED)	 读取未提交数据(会出现脏读， 不可重复读)，基本不使用
+     *   3.1 @Transactional(isolation = Isolation.READ_UNCOMMITTED)	 读取未提交数据(会出现脏读， 不可重复读)
      *   3.2 @Transactional(isolation = Isolation.READ_COMMITTED) 读取已提交数据(会出现不可重复读和幻读)
      *   3.3 @Transactional(isolation = Isolation.REPEATABLE_READ)	可重复读(会出现幻读)
      *   3.4 @Transactional(isolation = Isolation.SERIALIZABLE)	 串行化
      *
+     * 名词释义：
+     * 脏读 ，脏读就是指当一个事务正在访问数据，并且对数据进行了修改未提及 也可以看。
+     * 不可重复读，是指在数据库访问中，一个事务范围内两个相同的查询却返回了不同数据。
+     * 幻读，
+     *
+     * MYSQL：可重复读
      */
     @Test
     @Transactional
     public void helloTransactionsDetail() {
+
+        // CASE:1
+        // A的隔离级别设置为 Read Uncommitted  (读未提交)
+        // B更新了一条记录，但是没有提交
+
+        // RESULT:
+        // 事务A 可以查询出未提交记录。造成脏读现象。未提交读是最低的隔离级别
+
+
+
+        // CASE:2
+        // A的隔离级别设置为 Read Committed    (已提交读)
+        // B更新了一条记录，但是没有提交
+        // B更新了一条记录，提交提交
+
+        // RESULT:
+        // 事务A 只可以查询已提交记录。 B更新了一条记录未提交 A查询不到,B更新了一条记录已提交提 A查询得到
+
+
+
+        // CASE:3
+        // 将A的隔离级别设置为Repeatable Read  (可重复读)
+        
+        // RESULT:
+        // 
+
+
 
     }
 
