@@ -14,6 +14,7 @@ import com.example.slyangsecurity.modules.block.entity.BcChaincode;
 import com.example.slyangsecurity.modules.block.entity.TestTable;
 import com.example.slyangsecurity.modules.block.entity.UserRole;
 import com.example.slyangsecurity.modules.block.service.BcChaincodeService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class MybatisTestCase {
 
 // case in CURD
