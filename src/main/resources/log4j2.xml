@@ -66,21 +66,20 @@
 
     <!-- Mixed sync/async -->
     <Loggers>
-        <Root level="info" includeLocation="true">
-            <AppenderRef ref="console"/>
-            <AppenderRef ref="infoFile"/>
-            <AppenderRef ref="errorFile"/>
-        </Root>
-
+        <!--<Root level="info" includeLocation="true">-->
+            <!--<AppenderRef ref="console"/>-->
+            <!--<AppenderRef ref="infoFile"/>-->
+            <!--<AppenderRef ref="errorFile"/>-->
+        <!--</Root>-->
         <Logger name="com.example.slyangsecurity.modules" level="debug" additivity="false">
             <AppenderRef ref="console"/>
         </Logger>
 
-        <!--<AsyncRoot level="debug" includeLocation="true">-->
-            <!--<AppenderRef ref="console"/>-->
-            <!--<AppenderRef ref="infoFile"/>-->
-            <!--<AppenderRef ref="errorFile"/>-->
-        <!--</AsyncRoot>-->
+        <AsyncRoot level="info" includeLocation="true">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="infoFile"/>
+            <AppenderRef ref="errorFile"/>
+        </AsyncRoot>
     </Loggers>
 
 </configuration>
