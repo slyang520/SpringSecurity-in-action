@@ -80,7 +80,6 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/**/*.js", "/**/*.css","/**/*.css.map", "/**/*.ico", "/**/*.jpg", "/**/*.png","/**/*.woff2","/**/*.woff","/**/*.eot","/**/*.svg","/**/*.ttf").permitAll()
 				.antMatchers(
 						"/",
 						"/ftl","/ftl/**/*",
@@ -120,8 +119,19 @@ public class StateLessWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * 一般用来配置无需安全检查的路径
 	 */
 	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.debug(true);
+	public void configure(WebSecurity web) {
+		web.ignoring().antMatchers(
+				"/**/*.js",
+				"/**/*.css",
+				"/**/*.css.map",
+				"/**/*.ico",
+				"/**/*.jpg",
+				"/**/*.png",
+				"/**/*.woff2",
+				"/**/*.woff",
+				"/**/*.eot",
+				"/**/*.svg",
+				"/**/*.ttf");
 	}
 
 }
