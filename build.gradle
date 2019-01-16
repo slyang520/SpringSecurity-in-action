@@ -76,4 +76,6 @@ dependencies {
 	compile 'io.searchbox:jest:6.3.1' // es client
 	compile 'org.elasticsearch:elasticsearch:6.3.1' // es QueryBuilder or Settings
 
+	compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+
 }
