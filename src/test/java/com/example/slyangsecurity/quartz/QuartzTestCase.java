@@ -14,6 +14,8 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 public class QuartzTestCase {
 
+//    https://blog.csdn.net/loveLifeLoveCoding/article/details/80449077
+
 //      QuartzAutoConfiguration
 //    https://blog.csdn.net/u010648555/article/details/54863144
 //  名词
