@@ -1,20 +1,30 @@
 package com.example.slyangsecurity.config;
 
+import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
+import org.apache.catalina.filters.RequestDumperFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-/**
- * SwaggerConfig
- */
+@Profile({"dev"})
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+public class DevConfig {
+
+    /**
+     * 为测试环境添加相关的 Request Dumper information，便于调试
+     */
+    @Profile({"dev"})
+    @Bean
+    RequestDumperFilter requestDumperFilter() {
+        return new RequestDumperFilter();
+    }
 
     @Value("${server.servlet.path:}")
     private String pathMapping;
@@ -41,7 +51,6 @@ public class SwaggerConfig {
         return sb.toString();
     }
 
-
     @Bean
     public Docket restfulApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -56,5 +65,15 @@ public class SwaggerConfig {
                 .build()
                 .apiInfo(initApiInfo());
     }
+
+
+    /**
+     * Mybatis-plus 性能分析拦截器，不建议生产使用
+     */
+    @Bean
+    public PerformanceInterceptor performanceInterceptor(){
+        return new PerformanceInterceptor();
+    }
+
 
 }
