@@ -47,7 +47,7 @@ public class TokenAuthUserService
 		}
 
 		// to set userDetails
-		Map<String,Object> test = new HashMap();
+		Map<String,Object> test = new HashMap<>();
 		test.put("test","ff");
 		test.put("test1","1ff");
 		test.put("test2","2ff");

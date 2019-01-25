@@ -8,9 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.ArrayList;
 
 @Profile({"dev"})
 @Configuration
@@ -30,16 +33,15 @@ public class DevConfig {
     private String pathMapping;
 
     private ApiInfo initApiInfo() {
-        ApiInfo apiInfo = new ApiInfo("XXX项目 Platform API",//大标题
+
+        return new ApiInfo("XXX项目 Platform API",//大标题
                 initContextInfo(),//简单的描述
                 "1.0.0",//版本
                 "服务条款",
-                "后台开发团队",//作者
+                new Contact("后台开发团队", "", ""),
                 "The Apache License, Version 2.0",//链接显示文字
-                "http://www.baidu.com"//网站链接
-        );
-
-        return apiInfo;
+                "http://www.baidu.com",//网站链接
+                new ArrayList<>());
     }
 
     private String initContextInfo() {
