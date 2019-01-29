@@ -10,8 +10,7 @@
     <properties>
         <Property name="fileName">/opt/hyht/slyang</Property>
         <Property name="fileGz">/opt/hyht/slyang/7z</Property>
-        <Property name="PID">????</Property>
-        <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
+        <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${sys:PID} --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
     </properties>
 
     <Appenders>
@@ -27,7 +26,9 @@
         <!-- 打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
         <!--immediateFlush这个值默认是true，表示每次写入后都会flush操作，这个可以确保日志可以及时的写入磁盘，但是效率较低-->
         <!--immediateFlush设为false 意思缓存后批量批量刷-->
-        <RollingRandomAccessFile name="infoFile" fileName="${fileName}/web-info.log" immediateFlush="true"
+        <RollingRandomAccessFile name="infoFile"
+                                 fileName="${fileName}/web-info.log"
+                                 immediateFlush="true"
                                  filePattern="${fileGz}/$${date:yyyy-MM}/%d{yyyy-MM-dd}-%i.web-info.gz">
             <PatternLayout pattern="${LOG_PATTERN}"/>
 
@@ -46,7 +47,9 @@
         </RollingRandomAccessFile>
 
         <!-- 存储所有error信息 -->
-        <RollingRandomAccessFile name="errorFile" fileName="${fileName}/web-error.log" immediateFlush="false"
+        <RollingRandomAccessFile name="errorFile"
+                                 fileName="${fileName}/web-error.log"
+                                 immediateFlush="false"
                                  filePattern="${fileGz}/$${date:yyyy-MM}/%d{yyyy-MM-dd}-%i.web-error.gz">
             <PatternLayout pattern="${LOG_PATTERN}"/>
 
