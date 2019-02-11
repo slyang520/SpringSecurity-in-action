@@ -219,8 +219,8 @@ public class MybatisTestCase {
     @Test
     public void helloUpdate() {
 
-        BcChaincode chaincode = bcChaincodeMapper.selectById("1");
-        bcChaincodeMapper.updateById(chaincode);
+//        BcChaincode chaincode = bcChaincodeMapper.selectById("1");
+//        bcChaincodeMapper.updateById(chaincode);
 
         // UPDATE bc_chaincode SET name=?, path=?, version=?, channel_id=?, date_test=? WHERE id=?
         //==> Parameters: fdfdf(String), ffsdffdsfs(String), 1.3(String), 666(Integer), null, 1(Integer)
