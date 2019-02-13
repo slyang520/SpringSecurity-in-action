@@ -10,7 +10,8 @@
     <properties>
         <Property name="fileName">/opt/hyht/slyang</Property>
         <Property name="fileGz">/opt/hyht/slyang/7z</Property>
-        <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${sys:PID} --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+        <property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${sys:PID} --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</property>
+        <Property name="LOG_PATTERN_COLOR">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{${LOG_LEVEL_PATTERN:-%5p}} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%t]}{faint} %clr{%-40.40logger{39}}{cyan} %clr{:}{faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}</Property>
     </properties>
 
     <Appenders>
@@ -19,8 +20,7 @@
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
             <!-- 输出日志的格式 -->
-            <!--%highlight{} 设置颜色-->
-            <PatternLayout pattern="%highlight{${LOG_PATTERN}}"/>
+            <PatternLayout pattern="${LOG_PATTERN_COLOR}"/>
         </Console>
 
         <!-- 打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
