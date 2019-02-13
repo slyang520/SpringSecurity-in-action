@@ -1,4 +1,4 @@
-package com.example.slyangsecurity.config;
+package com.example.slyangsecurity.config.redis;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;

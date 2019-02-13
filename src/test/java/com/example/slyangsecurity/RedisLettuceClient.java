@@ -1,6 +1,7 @@
 package com.example.slyangsecurity;
 
 import com.alibaba.fastjson.JSON;
+import com.example.slyangsecurity.config.redis.RedisUtil;
 import com.example.slyangsecurity.modules.block.entity.BcChaincode;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -49,6 +50,9 @@ public class RedisLettuceClient {
     @Autowired
     ZSetOperations<String, Object> zSetOperations;  // Zset（有序集合）
 
+    @Autowired
+    RedisUtil redisUtil;
+
 //    set key
 //    get key
 //    del key
@@ -60,13 +64,18 @@ public class RedisLettuceClient {
     public void stringDetails() {
         // set 字符串
         valueOperations.set("slyang_test_set","slyang_test_set_value",60 , TimeUnit.SECONDS);
-        String hello = (String) valueOperations.get("slyang_test_set");
+        String hello = redisUtil.getCacheObject("slyang_test_set",String.class);
+
+        valueOperations.set("slyang_test_set_int",123,60 , TimeUnit.SECONDS);
+        Integer hello_int = redisUtil.getCacheObject("slyang_test_set_int",Integer.class);
+
+
         log.warn(hello);
 
         // set 对象
         BcChaincode bcChaincode = new BcChaincode().setVersion("123").setName("345");
         valueOperations.set("slyang_test_set_object",bcChaincode,60 , TimeUnit.SECONDS);
-        BcChaincode hello_object = (BcChaincode) valueOperations.get("slyang_test_set_object");
+        BcChaincode hello_object = redisUtil.getCacheObject("slyang_test_set_object",BcChaincode.class);
         log.warn(JSON.toJSONString(hello_object));
 
         // set 一个值KEY不存在就设置，存在就不设置
