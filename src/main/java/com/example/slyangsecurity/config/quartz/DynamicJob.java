@@ -19,7 +19,7 @@ public class DynamicJob extends QuartzJobBean {
     BcChaincodeMapper bcChaincodeMapper;
 
     @Override
-    protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+    protected void executeInternal(JobExecutionContext context) {
 
         bcChaincodeMapper.selectById(1);
         logger.info(JSON.toJSONString(context.getMergedJobDataMap()));

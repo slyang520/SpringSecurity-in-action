@@ -37,10 +37,10 @@ public class RedisUtil {
     /**
      * 缓存 对象JSON 序列化
      * @param key
-     * @param classT
      */
-    public <T> T  getCacheObject(String key, Class<T> classT){
-        return (T)valueOperations.get(key);
+    @SuppressWarnings("unchecked")
+    public <T> T  getCacheObject(String key){
+        return (T) valueOperations.get(key);
     }
 
 

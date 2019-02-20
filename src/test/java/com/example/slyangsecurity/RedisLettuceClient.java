@@ -64,10 +64,10 @@ public class RedisLettuceClient {
     public void stringDetails() {
         // set 字符串
         valueOperations.set("slyang_test_set","slyang_test_set_value",60 , TimeUnit.SECONDS);
-        String hello = redisUtil.getCacheObject("slyang_test_set",String.class);
+        String hello = redisUtil.getCacheObject("slyang_test_set");
 
         valueOperations.set("slyang_test_set_int",123,60 , TimeUnit.SECONDS);
-        Integer hello_int = redisUtil.getCacheObject("slyang_test_set_int",Integer.class);
+        Integer hello_int = redisUtil.getCacheObject("slyang_test_set_int");
 
 
         log.warn(hello);
@@ -75,7 +75,7 @@ public class RedisLettuceClient {
         // set 对象
         BcChaincode bcChaincode = new BcChaincode().setVersion("123").setName("345");
         valueOperations.set("slyang_test_set_object",bcChaincode,60 , TimeUnit.SECONDS);
-        BcChaincode hello_object = redisUtil.getCacheObject("slyang_test_set_object",BcChaincode.class);
+        BcChaincode hello_object = redisUtil.getCacheObject("slyang_test_set_object");
         log.warn(JSON.toJSONString(hello_object));
 
         // set 一个值KEY不存在就设置，存在就不设置
