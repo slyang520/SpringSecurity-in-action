@@ -35,7 +35,8 @@ public class RedisUtil {
     }
 
     /**
-     * 缓存 对象JSON 序列化
+     * 获取缓存对象
+     * 字符串 JSON反序列化
      * @param key
      */
     @SuppressWarnings("unchecked")
