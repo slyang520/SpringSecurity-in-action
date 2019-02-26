@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -44,5 +45,22 @@ public class RedisUtil {
         return (T) valueOperations.get(key);
     }
 
+    /**
+     * 删除
+     * @param key
+     * @return
+     */
+    public Boolean  delByKey(String key){
+        return valueOperations.getOperations().delete(key);
+    }
+
+    /**
+     * 批量删除
+     * @param keys
+     * @return
+     */
+    public Long batchDelByKeys(Collection<String> keys){
+        return valueOperations.getOperations().delete(keys);
+    }
 
 }
