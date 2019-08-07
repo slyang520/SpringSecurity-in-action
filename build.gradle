@@ -3,8 +3,8 @@ buildscript {
 		springBootVersion = '2.1.2.RELEASE'
 	}
 	repositories {
-		maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
 		maven { url 'https://plugins.gradle.org/m2/' }
+		maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -22,6 +22,11 @@ apply plugin: 'io.spring.dependency-management'
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+wrapper {
+	gradleVersion = '5.4.1'
+	distributionType = Wrapper.DistributionType.ALL
+}
 
 repositories {
 	mavenLocal()
@@ -42,40 +47,53 @@ configurations {
 
 
 dependencies {
-	compile 'org.springframework.boot:spring-boot-starter'
-	compile 'org.springframework.boot:spring-boot-starter-web'
-	compile 'org.springframework.boot:spring-boot-starter-security'
-	compile 'org.springframework.boot:spring-boot-starter-freemarker'
-	compile 'org.springframework.boot:spring-boot-starter-log4j2'
-	compile 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
-	compile 'org.apache.logging.log4j:log4j-api:2.11.0'
-	compile 'com.lmax:disruptor:3.3.6'
-	compile 'org.apache.commons:commons-pool2:2.5.0'
+	implementation 'org.apache.logging.log4j:log4j-api:2.11.0'
+	implementation 'com.lmax:disruptor:3.3.6'
+	implementation 'org.apache.commons:commons-pool2:2.5.0'
 
-	//compile("org.springframework.boot:spring-boot-devtools")
-	compileOnly('org.projectlombok:lombok:1.18.4')
+	//implementation("org.springframework.boot:spring-boot-devtools")
+    implementation('org.projectlombok:lombok:1.18.4')
+    
 	annotationProcessor('org.projectlombok:lombok:1.18.4')
-	testCompile('org.projectlombok:lombok:1.18.4')
+	testImplementation('org.projectlombok:lombok:1.18.4')
 	testAnnotationProcessor('org.projectlombok:lombok:1.18.4')
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.springframework.security:spring-security-test')
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation('org.springframework.security:spring-security-test')
 
-	compile 'org.springframework.boot:spring-boot-starter-quartz'
+	implementation 'org.springframework.boot:spring-boot-starter-quartz'
 
-	compile 'com.alibaba:fastjson:1.2.44'
-	compile 'io.springfox:springfox-swagger2:2.8.0'
-	compile 'io.springfox:springfox-swagger-ui:2.8.0'
+	implementation 'com.alibaba:fastjson:1.2.44'
+	implementation 'io.springfox:springfox-swagger2:2.8.0'
+	implementation 'io.springfox:springfox-swagger-ui:2.8.0'
 
 
-	compile("com.baomidou:mybatis-plus-boot-starter:3.0.6")
-	compile 'mysql:mysql-connector-java:5.1.38'
-	compile 'org.codehaus.groovy:groovy-all:2.3.3'
+	implementation("com.baomidou:mybatis-plus-boot-starter:3.1.2")
+	testImplementation("com.baomidou:mybatis-plus-generator:3.1.2")
+	implementation 'mysql:mysql-connector-java:5.1.38'
+	implementation 'org.codehaus.groovy:groovy-all:2.3.3'
 
-	compile 'io.searchbox:jest:6.3.1' // es client
-	compile 'org.elasticsearch:elasticsearch:6.3.1' // es QueryBuilder or Settings
+	implementation 'com.alibaba.csp:sentinel-core:1.6.1'
 
-	compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+	implementation 'io.searchbox:jest:6.3.1' // es client
+	implementation 'org.elasticsearch:elasticsearch:6.3.1' // es QueryBuilder or Settings
 
+	implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+
+}
+
+
+
+test {
+	filter {
+		//all classes in package, recursively
+		includeTestsMatching "com.example.slyangsecurity.Integrate.*"
+	}
 }
